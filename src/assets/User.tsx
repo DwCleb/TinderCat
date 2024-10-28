@@ -6,7 +6,7 @@ interface IconProps {
 }
 
 const User = ({ color = '#BFBFC0' }: IconProps) => (
-  <Svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <Svg width="20" height="20" viewBox="0 0 20 20" fill="none">
     <Path
       d="M16.6667 17.5V15.8333C16.6667 14.9493 16.3155 14.1014 15.6903 13.4763C15.0652 12.8512 14.2174 12.5 13.3333 12.5H6.66666C5.78261 12.5 4.93476 12.8512 4.30964 13.4763C3.68452 14.1014 3.33333 14.9493 3.33333 15.8333V17.5"
       stroke={color} stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
