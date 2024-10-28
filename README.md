@@ -52,7 +52,8 @@ This is one way to run your app — you can also run it directly from within And
 
 ## Step 3: Adding the API_KEY
 
-you need an API Key to fetch the data from cats endpoints, the Api key leaked in the repo is revoked.
+you need an API Key to fetch the data from cats endpoints. ~~the Api key leaked in the repo is revoked.~~
+
 you need to go to src/api/useRequest and add the API key there in the const variable.
 
 
