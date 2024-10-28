@@ -1,6 +1,7 @@
 import React, {useCallback, useEffect, useState} from 'react';
 import {
   SafeAreaView,
+  Text, View,
 } from 'react-native';
 import styled from 'styled-components/native';
 
@@ -74,6 +75,32 @@ function HomeScreen(): React.JSX.Element {
     fetchData();
   }, [fetchData]);
 
+  const renderCatProfiles = useCallback(() => {
+    return loading ? (
+        <Skeleton
+          position={'absolute'}
+          top={sizes.xl}
+          width={'100%'}
+          height={sizes.cardHeight}
+          borderRadius={sizes.m}
+        />)
+      :
+      data?.map((cat) => {
+        return (
+          <Card
+            key={cat.id}
+            data={cat}
+            onSwipe={onSwipe}
+            onCardLeftScreen={(direction) => onCardLeftScreen(cat.id, direction)}/>
+        );
+      });
+  }, [loading])
+
+  const renderStaredProfiles = useCallback(() => {
+    return (<View style={{alignItems: 'center', justifyContent: 'center', marginTop:200}}>
+      <Text>Sorry, no stars here :/</Text>
+    </View>)
+  },[]);
 
   return (
     <SafeContainer>
@@ -81,31 +108,15 @@ function HomeScreen(): React.JSX.Element {
         <SwitchContainer>
           <Switch value={gameView} onValueChange={(value) => setGameView(value)}/>
         </SwitchContainer>
-        {loading ? (
-          <Skeleton
-            position={'absolute'}
-            top={sizes.xl}
-            width={'100%'}
-            height={sizes.cardHeight}
-            borderRadius={sizes.m}
-          />)
-          :
-          data?.map((cat) => {
-            return (
-              <Card
-                key={cat.id}
-                data={cat}
-                onSwipe={onSwipe}
-                onCardLeftScreen={(direction) => onCardLeftScreen(cat.id, direction)}/>
-          );
-          })
-        }
+        {gameView === GAME_TYPE.LIKE ? renderCatProfiles() : renderStaredProfiles()}
       </PageContent>
-      <ButtonsContainer>
-        <VoteButtons
-          onLike={() => swipe('right')}
-          onUnlike={() => swipe('left')}/>
-      </ButtonsContainer>
+      {gameView === GAME_TYPE.LIKE &&
+        <ButtonsContainer>
+          <VoteButtons
+            onLike={() => swipe('right')}
+            onUnlike={() => swipe('left')}/>
+        </ButtonsContainer>
+      }
     </SafeContainer>
   );
 }

@@ -1,7 +1,7 @@
 import {Cat} from "../utils.ts";
 import {useCallback, useState} from "react";
 
-
+const API_KEY = '';
 const useRequest = () => {
   const [requestPending, setRequestPending] = useState(false);
   const [requestError, setRequestError] = useState<string | null>(null);
@@ -11,7 +11,7 @@ const useRequest = () => {
       setRequestError(null);
       setRequestPending(true);
       const response = await fetch('https://api.thecatapi.com/v1/images/search?limit=20&has_breeds=1',
-        { headers: {'x-api-key': 'live_yMxlCbqU9W1uSWEtv5HbW9ergYQIsEmTMUPpFe7kjTEW7lpe0tP1krQs2cjne9pt'}}
+        { headers: {'x-api-key': API_KEY}}
       );
 
       const json = await response.json();
@@ -45,7 +45,7 @@ const useRequest = () => {
         }),
         headers: {
           'Content-Type': 'application/json',
-          'x-api-key': 'live_yMxlCbqU9W1uSWEtv5HbW9ergYQIsEmTMUPpFe7kjTEW7lpe0tP1krQs2cjne9pt'}}
+          'x-api-key': API_KEY}}
     );
     console.log(response);
 
